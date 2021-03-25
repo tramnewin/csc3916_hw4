@@ -2,8 +2,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const crypto = require("crypto");
 var rp = require('request-promise');
-
+var authJwtController = require('./auth_jwt');
+db = require('./db')(); //hack
+var jwt = require('jsonwebtoken');
+var cors = require('cors');
+var User = require('./Users');
+var Movie = require('./movies')
 var app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -45,14 +51,47 @@ function trackDimension(category, action, label, value, dimension, metric) {
 }
 
 
-router.route('/test')
+router.post('/signin', function (req, res) {
+    var userNew = new User();
+    userNew.username = req.body.username;
+    userNew.password = req.body.password;
+
+    User.findOne({ username: userNew.username }).select('name username password').exec(function(err, user) {
+        if (err) {
+            res.send(err);
+        }
+
+        user.comparePassword(userNew.password, function(isMatch) {
+            if (isMatch) {
+                var userToken = { id: user.id, username: user.username };
+                var token = jwt.sign(userToken, process.env.SECRET_KEY);
+                res.json ({success: true, token: 'JWT ' + token});
+            }
+            else {
+                res.status(401).send({success: false, msg: 'Authentication failed.'});
+            }
+        })
+    })
+});
+router.route('/movies?reviews=true')
     .get(function (req, res) {
         // Event value must be numeric.
-        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '3', 'Guardian\'s of the Galaxy 2', '1')
+        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '5', 'Parasite', '1')
             .then(function (response) {
                 console.log(response.body);
                 res.status(200).send('Event tracked.').end();
             })
+    })
+    .post(authJwtController.isAuthenticated, function(req, res){
+        if(true){
+            Movie.find({}, function(err, movies){
+                if(err)
+                    res.send(err);
+                res.json({Movie: movies});
+            })
+        }
+
+
     });
 
 app.use('/', router);
