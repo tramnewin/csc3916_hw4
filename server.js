@@ -225,11 +225,7 @@ router.route('/movies?reviews='+ `${val}`)
 
     })
     .get(function(req, res){
-        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '5', 'Parasite', '1')
-            .then(function (response) {
-                console.log(response.body);
-                res.status(200).send('Event tracked.').end();
-            })
+
         if(val == true){
             Movie.find({}, function(err, movies){
                 if(err)
