@@ -166,7 +166,7 @@ router.route('/movies')
                 Movie.find({}, function(err, movies){
                     if(err)
                         res.send(err);
-                    res.json({Movie: movies});
+                    res.json({message: review, Movie: movies});
                 })
             }
         }
