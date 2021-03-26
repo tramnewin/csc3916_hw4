@@ -165,13 +165,18 @@ router.route('/movies')
                 })
             }
         }
-        if (false){
-            Movie.find({}, function (err, movies) {
-                if (err)
-                    res.send(err);
-                res.json({Movie: movies});
-            })
+        else{
+            if (review == false){
+                if (true){
+                    Movie.find({}, function (err, movies) {
+                        if (err)
+                            res.send(err);
+                        res.json({Movie: movies});
+                    })
+                }
+            }
         }
+
 
 
     });
