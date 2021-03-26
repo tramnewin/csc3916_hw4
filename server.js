@@ -236,6 +236,8 @@ router.route('/movies?reviews='+ `${val}`)
                     res.send(err);
                 res.json({Movie: movies});
             })
+        }else{
+            res.json({message: 'Error'})
         }
 
     });
