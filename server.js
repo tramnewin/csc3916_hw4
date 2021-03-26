@@ -1,5 +1,5 @@
 /*
-CSC3916 HW3
+CSC3916 HW4
 File: Server.js
 Description: Web API scaffolding for Movie API
  */
@@ -14,6 +14,7 @@ var jwt = require('jsonwebtoken');
 var cors = require('cors');
 var User = require('./Users');
 var Movie = require('./movies')
+var Review = require('./reviews')
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -154,6 +155,43 @@ router.route('/movies')
 
     })
     .get(authJwtController.isAuthenticated, function(req, res){
+        if(true){
+            Movie.find({}, function(err, movies){
+                if(err)
+                    res.send(err);
+                res.json({Movie: movies});
+            })
+        }
+    });
+router.route('/movies?reviews=')
+    .post(authJwtController.isAuthenticated, function(req, res){
+        if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
+            res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
+        }else{
+            if (req.body.Actors.length<3){
+                res.json({success: false, msg: 'Please provide at least 3 actors.'})
+            }
+            else{
+                var movie = new Movie();
+                movie.Title = req.body.Title;
+                movie.Year = req.body.Year;
+                movie.Genre = req.body.Genre;
+                movie.Actors = req.body.Actors;
+                movie.save(function (err){
+                    if (err){
+                        if (err.code == 11000)
+                            return res.json({success: false, msg: 'The movie is already exist.'});
+                        else
+                            return res.send(err);
+                    }
+                    res.json({message: 'Movie is created.'});
+                });
+            }
+        }
+
+
+    })
+    .get(function(req, res){
         if(true){
             Movie.find({}, function(err, movies){
                 if(err)
