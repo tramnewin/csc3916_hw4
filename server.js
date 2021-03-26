@@ -157,11 +157,17 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if(review == 'true'){
-        Review.find({}, function(err, reviews){
+            Review.find({}, function(err, reviews){
             if(err)
                 res.send(err);
-            res.json({message: review,Review: reviews});
-            })}else{
+
+            })
+            Movie.find({}, function(err, movies){
+                if(err)
+                    res.send(err);
+            })
+            res.json({message: review, Movie: movies, Review: reviews});
+        }else{
             if(review== 'false'){
                 Movie.find({}, function(err, movies){
                     if(err)
@@ -170,6 +176,7 @@ router.route('/movies')
                 })
             }
         }
+
 
     });
 
