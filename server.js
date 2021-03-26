@@ -163,7 +163,7 @@ router.route('/movies')
             })
         }
     });
-router.route('/movies?reviews='+ `${val}`)
+router.route('/movies?reviews='+ val)
     .post(function(req, res){
         if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
             res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
