@@ -163,7 +163,7 @@ router.route('/movies')
             })
         }
     });
-router.route('/movies?reviews='+ val)
+router.route('/movies?')
     .post(function(req, res){
         if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
             res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
@@ -191,9 +191,10 @@ router.route('/movies?reviews='+ val)
 
 
     })
-    .get(function(req, res){
+    .get(async function(req, res){
+        let reviews = req.query.reviews;
 
-        if(val == true){
+        if(reviews == true){
             Movie.find({}, function(err, movies){
                 if(err)
                     res.send(err);
