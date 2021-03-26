@@ -155,13 +155,14 @@ router.route('/movies')
 
     })
     .get(authJwtController.isAuthenticated, function(req, res){
-        if(true){
-            Movie.find({}, function(err, movies){
-                if(err)
-                    res.send(err);
-                res.json({Movie: movies});
-            })
+
+        let review = req.query.review;
+        if(review == true){
+            res.json({message: review})
+        }else{
+            res.json({message: review})
         }
+
     });
 router.route('/movies?')
     .post(function(req, res){
@@ -193,11 +194,10 @@ router.route('/movies?')
     })
     .get(async function(req, res){
         let reviews = req.query.reviews;
-        console.log(reviews)
         if(reviews == true){
-            res.json({message: 'come thru'})
+            res.json({message: reviews})
         }else{
-            res.json({message: 'Error'})
+            res.json({message: reviews})
         }
 
     });
