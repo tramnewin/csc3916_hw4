@@ -158,13 +158,13 @@ router.route('/movies')
 
         let review = req.query.review;
         if(review == true){
-            res.json({message: review})
-        }else{
-            Movie.find({}, function(err, movies){
+            Review.find({}, function(err, reviews){
                 if(err)
                     res.send(err);
-                res.json({Movie: movies});
+                res.json({Review: reviews});
             })
+        }else{
+            res.json({message: review})
         }
 
     });
