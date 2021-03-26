@@ -15,15 +15,16 @@ var cors = require('cors');
 var User = require('./Users');
 var Movie = require('./movies')
 var Review = require('./reviews')
+const crypto = require("crypto");
+var rp = require('request-promise');
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
-
 var router = express.Router();
-
+const GA_TRACKING_ID = process.env.GA_KEY;
 function getJSONObjectForMovieRequirement(req) {
     var json = {
         headers: "No headers",
@@ -40,6 +41,38 @@ function getJSONObjectForMovieRequirement(req) {
     }
 
     return json;
+}
+function trackDimension(category, action, label, value, dimension, metric) {
+
+    var options = { method: 'GET',
+        url: 'https://www.google-analytics.com/collect',
+        qs:
+            {   // API Version.
+                v: '1',
+                // Tracking ID / Property ID.
+                tid: GA_TRACKING_ID,
+                // Random Client Identifier. Ideally, this should be a UUID that
+                // is associated with particular user, device, or browser instance.
+                cid: crypto.randomBytes(16).toString("hex"),
+                // Event hit type.
+                t: 'event',
+                // Event category.
+                ec: category,
+                // Event action.
+                ea: action,
+                // Event label.
+                el: label,
+                // Event value.
+                ev: value,
+                // Custom Dimension
+                cd1: dimension,
+                // Custom Metric
+                cm1: metric
+            },
+        headers:
+            {  'Cache-Control': 'no-cache' } };
+
+    return rp(options);
 }
 
 router.post('/signup', function(req, res) {
@@ -163,7 +196,7 @@ router.route('/movies')
             })
         }
     });
-router.route('/movies?reviews=')
+router.route('/movies?reviews='+ `${val}`)
     .post(function(req, res){
         if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
             res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
@@ -192,13 +225,19 @@ router.route('/movies?reviews=')
 
     })
     .get(function(req, res){
-        if(true){
+        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '5', 'Parasite', '1')
+            .then(function (response) {
+                console.log(response.body);
+                res.status(200).send('Event tracked.').end();
+            })
+        if(val == true){
             Movie.find({}, function(err, movies){
                 if(err)
                     res.send(err);
                 res.json({Movie: movies});
             })
         }
+
     });
 
 app.use('/', router);
