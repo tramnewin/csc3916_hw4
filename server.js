@@ -193,7 +193,7 @@ router.route('/movies?')
     })
     .get(async function(req, res){
         let reviews = req.query.reviews;
-
+        console.log(reviews)
         if(reviews == true){
             res.json({message: 'come thru'})
         }else{
