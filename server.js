@@ -162,7 +162,11 @@ router.route('/movies')
             if(err)
                 res.send(err);
             res.json({Review: reviews});
-            })}
+            })}else{
+            if(!review){
+                res.json({message: 'wefdc'})
+            }
+        }
 
     });
 
