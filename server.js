@@ -162,7 +162,13 @@ router.route('/movies')
                 res.send(err);
             res.json({message: review,Review: reviews});
             })}else{
-            res.json({message: review})
+            if(true){
+                Movie.find({}, function(err, movies){
+                    if(err)
+                        res.send(err);
+                    res.json({Movie: movies});
+                })
+            }
         }
 
     });
