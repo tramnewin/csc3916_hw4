@@ -1,7 +1,13 @@
+/*
+CSC3916 HW3
+File: Server.js
+Description: Web API scaffolding for Movie API
+ */
+
 var express = require('express');
 var bodyParser = require('body-parser');
-const crypto = require("crypto");
-var rp = require('request-promise');
+var passport = require('passport');
+var authController = require('./auth');
 var authJwtController = require('./auth_jwt');
 db = require('./db')(); //hack
 var jwt = require('jsonwebtoken');
@@ -13,43 +19,49 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(passport.initialize());
+
 var router = express.Router();
 
-const GA_TRACKING_ID = process.env.GA_KEY;
+function getJSONObjectForMovieRequirement(req) {
+    var json = {
+        headers: "No headers",
+        key: process.env.UNIQUE_KEY,
+        body: "No body"
+    };
 
-function trackDimension(category, action, label, value, dimension, metric) {
+    if (req.body != null) {
+        json.body = req.body;
+    }
 
-    var options = { method: 'GET',
-        url: 'https://www.google-analytics.com/collect',
-        qs:
-            {   // API Version.
-                v: '1',
-                // Tracking ID / Property ID.
-                tid: GA_TRACKING_ID,
-                // Random Client Identifier. Ideally, this should be a UUID that
-                // is associated with particular user, device, or browser instance.
-                cid: crypto.randomBytes(16).toString("hex"),
-                // Event hit type.
-                t: 'event',
-                // Event category.
-                ec: category,
-                // Event action.
-                ea: action,
-                // Event label.
-                el: label,
-                // Event value.
-                ev: value,
-                // Custom Dimension
-                cd1: dimension,
-                // Custom Metric
-                cm1: metric
-            },
-        headers:
-            {  'Cache-Control': 'no-cache' } };
+    if (req.headers != null) {
+        json.headers = req.headers;
+    }
 
-    return rp(options);
+    return json;
 }
 
+router.post('/signup', function(req, res) {
+    if (!req.body.username || !req.body.password) {
+        res.json({success: false, msg: 'Please include both username and password to signup.'})
+    } else {
+        var user = new User();
+        user.name = req.body.name;
+        user.username = req.body.username;
+        user.password = req.body.password;
+
+        user.save(function(err){
+            if (err) {
+                if (err.code == 11000)
+                    return res.json({ success: false, message: 'A user with that username already exists.'});
+                else
+                    return res.json(err);
+            }
+
+            res.json({success: true, msg: 'Successfully created new user.'})
+        });
+    }
+});
 
 router.post('/signin', function (req, res) {
     var userNew = new User();
@@ -73,16 +85,75 @@ router.post('/signin', function (req, res) {
         })
     })
 });
-router.route('/movies?reviews=true')
-    .get(function (req, res) {
-        // Event value must be numeric.
-        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '5', 'Parasite', '1')
-            .then(function (response) {
-                console.log(response.body);
-                res.status(200).send('Event tracked.').end();
-            })
+router.route('/movies')
+    .delete(authJwtController.isAuthenticated, function(req, res) {
+        if (!req.body.Title){
+            res.json({success: false, msg: 'Please include Title for deletion.'});
+        }
+        else{
+            Movie.findOne({Title: req.body.Title}).exec(function(err,result){
+                if(result !== null){
+                    Movie.remove({Title: req.body.Title}).exec(function(err){
+                        if (err)
+                            res.json({success: false, msg: "Could not find movie: "+ req.body.Title+ ""});
+                        else
+                            res.json({success: true, msg:'Movie deleted.'});
+                    })
+                }
+            });
+        }
+    })
+
+    .put(authJwtController.isAuthenticated, function(req, res) {
+        var id = req.headers.id;
+        Movie.findOne({_id: id}).exec(function(err, movie){
+            if (err)
+                res.send(err);
+            movie.Title = req.body.Title;
+            movie.Year = req.body.Year;
+            movie.Genre = req.body.Genre;
+            movie.Actors = req.body.Actors;
+            movie.save(function(err){
+                if (err){
+                    if(err.code ==11000){
+                        return res.json({success: false, msg: 'The movie is already exist.'});
+                    }
+                    else
+                        return res.send(err);
+                }
+                res.json({message: 'Movie is updated.'});
+            });
+        });
+
     })
     .post(authJwtController.isAuthenticated, function(req, res){
+        if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
+            res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
+        }else{
+            if (req.body.Actors.length<3){
+                res.json({success: false, msg: 'Please provide at least 3 actors.'})
+            }
+            else{
+                var movie = new Movie();
+                movie.Title = req.body.Title;
+                movie.Year = req.body.Year;
+                movie.Genre = req.body.Genre;
+                movie.Actors = req.body.Actors;
+                movie.save(function (err){
+                    if (err){
+                        if (err.code == 11000)
+                            return res.json({success: false, msg: 'The movie is already exist.'});
+                        else
+                            return res.send(err);
+                    }
+                    res.json({message: 'Movie is created.'});
+                });
+            }
+        }
+
+
+    })
+    .get(authJwtController.isAuthenticated, function(req, res){
         if(true){
             Movie.find({}, function(err, movies){
                 if(err)
@@ -90,10 +161,10 @@ router.route('/movies?reviews=true')
                 res.json({Movie: movies});
             })
         }
-
-
     });
 
 app.use('/', router);
-console.log("http://localhost:8080/test");
 app.listen(process.env.PORT || 8080);
+module.exports = app; // for testing only
+
+
