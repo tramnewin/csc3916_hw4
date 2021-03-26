@@ -160,47 +160,15 @@ router.route('/movies')
         if(review == true){
             res.json({message: review})
         }else{
-            res.json({message: review})
+            Movie.find({}, function(err, movies){
+                if(err)
+                    res.send(err);
+                res.json({Movie: movies});
+            })
         }
 
     });
-router.route('/movies?')
-    .post(function(req, res){
-        if (!req.body.Title || !req.body.Year|| !req.body.Genre|| !req.body.Actors) {
-            res.json({success: false, msg: 'Please include Title, Year, Genre,Actors (there should be at least 3 actors).'});
-        }else{
-            if (req.body.Actors.length<3){
-                res.json({success: false, msg: 'Please provide at least 3 actors.'})
-            }
-            else{
-                var movie = new Movie();
-                movie.Title = req.body.Title;
-                movie.Year = req.body.Year;
-                movie.Genre = req.body.Genre;
-                movie.Actors = req.body.Actors;
-                movie.save(function (err){
-                    if (err){
-                        if (err.code == 11000)
-                            return res.json({success: false, msg: 'The movie is already exist.'});
-                        else
-                            return res.send(err);
-                    }
-                    res.json({message: 'Movie is created.'});
-                });
-            }
-        }
 
-
-    })
-    .get(async function(req, res){
-        let reviews = req.query.reviews;
-        if(reviews == true){
-            res.json({message: reviews})
-        }else{
-            res.json({message: reviews})
-        }
-
-    });
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
