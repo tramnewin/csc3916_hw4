@@ -156,16 +156,13 @@ router.route('/movies')
     })
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
-
         if(review){
         Review.find({}, function(err, reviews){
             if(err)
                 res.send(err);
             res.json({Review: reviews});
             })}else{
-            if(!review){
-                res.json({message: 'wefdc'})
-            }
+            res.json({message: 'wefdc'})
         }
 
     });
