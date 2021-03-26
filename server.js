@@ -160,9 +160,9 @@ router.route('/movies')
         Review.find({}, function(err, reviews){
             if(err)
                 res.send(err);
-            res.json({Review: reviews});
+            res.json({message: review,Review: reviews});
             })}else{
-            res.json({message: 'wefdc'})
+            res.json({message: review})
         }
 
     });
