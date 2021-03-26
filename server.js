@@ -157,17 +157,16 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if (review== true) {
-            if (true) {
-                Review.find({}, function (err, reviews) {
-                    if (err)
-                        res.send(err);
-                    res.json({Review: reviews});
-                })
-            }
+
+            Review.find({}, function (err, reviews) {
+                if (err)
+                    res.send(err);
+                res.json({Review: reviews});
+            })
         }
-        else{
-            res.json({message: review})
-        }
+        res.json({message: 'review false'})
+
+
 
     });
 
