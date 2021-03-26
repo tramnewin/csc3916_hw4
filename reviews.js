@@ -13,9 +13,9 @@ try {
 }
 mongoose2.set('useCreateIndex', true);
 var ReviewSchema = new Schema({
-    Name: {type:String, required: true},
-    Rating: { type: String, required: true},
-    Review: { type: String, required: true }
+    Name: {type:String},
+    Rating: { type: String},
+    Review: { type: String}
 });
 
 //return the model to server
