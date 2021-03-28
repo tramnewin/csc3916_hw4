@@ -174,6 +174,40 @@ router.route('/movies')
 
     });
 
+router.route('/reviews')
+    .post(authJwtController.isAuthenticated, function(req, res){
+        if (!req.body.Name || !req.body.Rating|| !req.body.Review) {
+            res.json({success: false, msg: 'Please include Name, Rating, Review.'});
+        }else{
+
+            var review = new Review();
+            review.Name = req.body.Name;
+            review.Rating = req.body.Rating;
+            review.Review = req.body.Reivew;
+            reivew.save(function (err){
+                if (err){
+                    if (err.code == 11000)
+                        return res.json({success: false, msg: 'The reivew is already exist.'});
+                    else
+                        return res.send(err);
+                }
+                res.json({message: 'Review is made.'});
+            });
+
+        }
+
+
+    })
+    .get(authJwtController.isAuthenticated, function(req, res){
+        if(true){
+            Review.find({}, function(err, reviews){
+                if(err)
+                    res.send(err);
+                res.json({message: review,Review: reviews});
+            })}
+
+
+    });
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
