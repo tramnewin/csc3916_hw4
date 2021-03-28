@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit">
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,21 +94,7 @@
       <workItem from="1616690341882" duration="1928000" />
       <workItem from="1616700684052" duration="3672000" />
       <workItem from="1616775094252" duration="14551000" />
-      <workItem from="1616969489611" duration="700000" />
-    </task>
-    <task id="LOCAL-00015" summary="fourth commit">
-      <created>1615392790107</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1615392790107</updated>
-    </task>
-    <task id="LOCAL-00016" summary="fourth commit">
-      <created>1615393032786</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1615393032786</updated>
+      <workItem from="1616969489611" duration="1026000" />
     </task>
     <task id="LOCAL-00017" summary="fourth commit">
       <created>1615393455948</created>
@@ -441,7 +425,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616970169332</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="third commit">
+      <created>1616970202370</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1616970202370</updated>
+    </task>
+    <task id="LOCAL-00065" summary="third commit">
+      <created>1616970277492</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1616970277493</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
