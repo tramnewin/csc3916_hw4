@@ -184,7 +184,7 @@ router.route('/reviews')
             review.Name = req.body.Name;
             review.Rating = req.body.Rating;
             review.Review = req.body.Reivew;
-            reivew.save(function (err){
+            Review.save(function (err){
                 if (err){
                     if (err.code == 11000)
                         return res.json({success: false, msg: 'The reivew is already exist.'});
