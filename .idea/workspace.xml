@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="second commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit">
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,21 +96,7 @@
       <workItem from="1616690341882" duration="1928000" />
       <workItem from="1616700684052" duration="3672000" />
       <workItem from="1616775094252" duration="14551000" />
-      <workItem from="1616969489611" duration="372000" />
-    </task>
-    <task id="LOCAL-00013" summary="fourth commit">
-      <created>1615392157265</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1615392157265</updated>
-    </task>
-    <task id="LOCAL-00014" summary="fourth commit">
-      <created>1615392238243</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1615392238243</updated>
+      <workItem from="1616969489611" duration="700000" />
     </task>
     <task id="LOCAL-00015" summary="fourth commit">
       <created>1615392790107</created>
@@ -442,7 +427,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616793542928</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="third commit">
+      <created>1616970148294</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1616970148294</updated>
+    </task>
+    <task id="LOCAL-00063" summary="third commit">
+      <created>1616970169332</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1616970169332</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -461,10 +460,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="third commit" />
     <MESSAGE value="fourth commit" />
     <MESSAGE value="second commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
+    <MESSAGE value="third commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="third commit" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

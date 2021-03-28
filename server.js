@@ -203,7 +203,7 @@ router.route('/reviews')
             Review.find({}, function(err, reviews){
                 if(err)
                     res.send(err);
-                res.json({message: review,Review: reviews});
+                res.json({Review: reviews});
             })}
 
 
