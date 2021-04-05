@@ -190,11 +190,12 @@ router.route('/movies')
 
 router.route('/reviews')
     .post(authJwtController.isAuthenticated, function(req, res){
-        if (!req.body.Name || !req.body.Rating|| !req.body.Review) {
+        if (!req.body.Title||!req.body.Name || !req.body.Rating|| !req.body.Review) {
             res.json({success: false, msg: 'Please include Name, Rating, Review.'});
         }else{
 
             var review = new Review();
+            review.Title = req.body.Title;
             review.Name = req.body.Name;
             review.Rating = req.body.Rating;
             review.Review = req.body.Review;
