@@ -157,11 +157,23 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if(review == 'true'){
-            Review.find({}, function(err, reviews){
-            if(err)
-                res.send(err);
-            res.json({message: review,Review: reviews});
-            })}else{
+            Movie.aggregate([{
+                $lookup: {
+                    //see $lookup documentation from should be reviews, localfield is Title (maybe?), foreignfield is Title, as “reviews”
+                    from: "reviews",
+                    localField: "Title",
+                    foreignField: "Title",
+                    as: "reviews"
+                }
+            }]).exec(function(err, movies) {
+                //check err for error else res.send(movies);
+                if (err) {
+                    return res.json(err);
+                } else {
+                    return res.json(movies);
+                }
+            })
+        }else{
             if(review== 'false'){
                 Movie.find({}, function(err, movies){
                     if(err)

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit" />
+    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/reviews.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +39,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CSC3916_HW5" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -94,14 +98,10 @@
       <workItem from="1616690341882" duration="1928000" />
       <workItem from="1616700684052" duration="3672000" />
       <workItem from="1616775094252" duration="14551000" />
-      <workItem from="1616969489611" duration="1026000" />
-    </task>
-    <task id="LOCAL-00017" summary="fourth commit">
-      <created>1615393455948</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1615393455949</updated>
+      <workItem from="1616969489611" duration="1169000" />
+      <workItem from="1617393743548" duration="23000" />
+      <workItem from="1617576890184" duration="751000" />
+      <workItem from="1617635896283" duration="1831000" />
     </task>
     <task id="LOCAL-00018" summary="fourth commit">
       <created>1615394360877</created>
@@ -439,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616970277493</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="third commit">
+      <created>1616970533071</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1616970533071</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
