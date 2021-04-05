@@ -113,6 +113,7 @@ router.route('/movies')
             movie.Title = req.body.Title;
             movie.Year = req.body.Year;
             movie.Genre = req.body.Genre;
+            movie.imageURL = req.body.imageURL;
             movie.Actors = req.body.Actors;
             movie.save(function(err){
                 if (err){
@@ -139,6 +140,7 @@ router.route('/movies')
                 movie.Title = req.body.Title;
                 movie.Year = req.body.Year;
                 movie.Genre = req.body.Genre;
+                movie.imageURL = req.body.imageURL;
                 movie.Actors = req.body.Actors;
                 movie.save(function (err){
                     if (err){

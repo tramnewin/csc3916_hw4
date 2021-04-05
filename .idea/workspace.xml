@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="third commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/reviews.js" afterDir="false" />
+    <list default="true" id="c5f46f7b-a3f5-4893-b5b2-3ebf25a3852d" name="Default Changelist" comment="reviews commit">
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,14 +99,7 @@
       <workItem from="1616969489611" duration="1169000" />
       <workItem from="1617393743548" duration="23000" />
       <workItem from="1617576890184" duration="751000" />
-      <workItem from="1617635896283" duration="1831000" />
-    </task>
-    <task id="LOCAL-00018" summary="fourth commit">
-      <created>1615394360877</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1615394360877</updated>
+      <workItem from="1617635896283" duration="3320000" />
     </task>
     <task id="LOCAL-00019" summary="fourth commit">
       <created>1615394603264</created>
@@ -446,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616970533071</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="reviews commit">
+      <created>1617641496606</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1617641496607</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +466,8 @@
     <MESSAGE value="fourth commit" />
     <MESSAGE value="second commit" />
     <MESSAGE value="third commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="third commit" />
+    <MESSAGE value="reviews commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="reviews commit" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
