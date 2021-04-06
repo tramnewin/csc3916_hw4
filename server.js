@@ -176,13 +176,13 @@ router.route('/movies')
                 }
             })
         }else{
-            if(review== 'false'){
-                Movie.find({}, function(err, movies){
-                    if(err)
-                        res.send(err);
-                    res.json(movies);
-                })
-            }
+
+            Movie.find({}, function(err, movies){
+                if(err)
+                    res.send(err);
+                res.json(movies);
+            })
+
         }
 
 
