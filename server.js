@@ -224,7 +224,7 @@ router.route('/reviews')
         try{
             if (!req.body.Title) throw 'Please provide the title'
             const movie = req.body.Title;
-            const reviews = await Review.find({Title: movie}).select('Rating').lean().exec();
+            const reviews = await Review.find({Title: movie}).select('_id Rating').lean().exec();
             if (!reviews) throw 'No review for ${movie}';
             res.status(200).json({success: true, Review: reviews});
         }
