@@ -159,13 +159,13 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if(review == 'true'){
-            Movie.findOne({Title:req.body.Title}, function(err, movie) {
+            Movie.findOne({title:req.body.title}, function(err, movie) {
                 if (err) {
                     res.json({success: false, message: "Error! The review was not found"})
                 }
                 else{
                     Movie.aggregate([{
-                        $match: {Title: req.body.Title}
+                        $match: {title: req.body.title}
                     },
                         {
                             $lookup: {
