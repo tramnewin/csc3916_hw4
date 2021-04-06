@@ -159,7 +159,7 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if(review == 'true'){
-            Movie.findOne({title:req.body.title}, function(err, movie) {
+            Movie.findOne({_id:req.body._id}, function(err, movie) {
                 if (err) {
                     res.json({success: false, message: "Error! The review was not found"})
                 }
