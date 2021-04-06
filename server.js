@@ -180,7 +180,7 @@ router.route('/movies')
                 Movie.find({}, function(err, movies){
                     if(err)
                         res.send(err);
-                    res.json({message: review, Movie: movies});
+                    res.json({Movie: movies});
                 })
             }
         }

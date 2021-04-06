@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CSC3916_HW5" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -100,14 +100,8 @@
       <workItem from="1617393743548" duration="23000" />
       <workItem from="1617576890184" duration="751000" />
       <workItem from="1617635896283" duration="4038000" />
-      <workItem from="1617646954625" duration="4222000" />
-    </task>
-    <task id="LOCAL-00022" summary="second commit">
-      <created>1616779829253</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1616779829253</updated>
+      <workItem from="1617646954625" duration="5669000" />
+      <workItem from="1617728477588" duration="835000" />
     </task>
     <task id="LOCAL-00023" summary="second commit">
       <created>1616780890407</created>
@@ -445,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617650352353</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="sixth commit">
+      <created>1617655144151</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1617655144151</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
