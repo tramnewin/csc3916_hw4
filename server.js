@@ -213,15 +213,23 @@ router.route('/reviews')
 
 
     })
-    .get(authJwtController.isAuthenticated, function(req, res){
-        if(true){
-            Review.find({}, function(err, reviews){
-                if(err)
-                    res.send(err);
-                res.json({Review: reviews});
-            })}
-
-
+    .get(authJwtController.isAuthenticated, async (req, res) => {
+        try{
+            if (!req.body.Title) throw 'Please provide the title'
+            const movie = req.body.Title;
+            const reviews = await Review.find({Title: movie}).select('_id').lean().exec();
+            if (!reviews) throw 'No review for ${movie}';
+            res.status(200).json({success: true, Review: reviews});
+        }
+        catch(errMsg){
+            if (errMsg.message){
+                res.status(400).json({success: false, msg: 'Database error'});
+                console.log(errMsg.message);
+            }
+            else{
+                res.status(400).json({success: false, msg: errMsg});
+            }
+        }
     });
 
 app.use('/', router);
