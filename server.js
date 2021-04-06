@@ -160,7 +160,7 @@ router.route('/movies')
         if(!req.body.title){
             res.status(403).json({success:false, message: "Please provide a movie to display"})
         }else {
-            Movie.find({Title:req.body.Title}).select ('Title Year Genre imageURL Actors').exec(function(err, movies){
+            Movie.find({Title:req.body.title}).select ('Title Year Genre imageURL Actors').exec(function(err, movies){
                 if(err)
                     res.send(err);
                 res.json({Movie: movies});
