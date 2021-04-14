@@ -164,20 +164,24 @@ router.route('/movies')
                     res.json({success: false, message: "Error! The review was not found"})
                 }
                 else{
-                    Movie.aggregate([
-                        { "$unwind": "$review" },
+                    Movie.aggregate([{
+                        $match: {_id: req.body._id}
+                    },
                         {
-                            "$group": {
-                                "_id": "review",
-                                "ratingAvg": { "$avg": "$rating" }
+                            $lookup: {
+                                from: "reviews",
+                                localField: "_id",
+                                foreignField: "_id",
+                                as: "reviews"
                             }
                         }
-                    ], function(err, results) {
-                        Movie.populate(results, { "path": "_id" }, function(err, result) {
-                            console.log(result);
-                        });
+                    ]).exec(function (err, movie) {
+                        if (err) {
+                            return res.json(err);
+                        } else {
+                            return res.json(movie);
+                        }
                     })
-
                 }
             })
 
