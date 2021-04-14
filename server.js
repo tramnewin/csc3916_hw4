@@ -174,7 +174,36 @@ router.route('/movies')
                                 foreignField: "Title",
                                 as: "reviews"
                             }
-                        }]).exec(function (err, movie) {
+                        },
+                        {
+                            $group:{
+                                Title: "Title",
+                                counts: {$push: {Rating: "$Title.rating", count: "$count"}},
+                                reviews: {$push: "$reviews"},
+                                totalItemCount: {$sum: "$count"}, //for avg calculation
+                                totalRating: {$sum: "$Title.rating"} // //for avg calculation
+                            }
+                            },
+                        {
+                            $project: {
+                                Title: "$Title",
+                                avgRating: {$divide: ["$totalRating", "$totalItemCount"]},
+                                counts: "$counts",
+                                reviews: {
+                                    $slice: [
+                                        {
+                                            $reduce: {
+                                                input: "$reviews",
+                                                initialValue: [],
+                                                in: { $concatArrays: ["$$value", "$$this"] }
+                                            }
+                                        }
+                                ]
+
+                                }
+                            }
+                        }
+                    ]).exec(function (err, movie) {
                         if (err) {
                             return res.json(err);
                         } else {
