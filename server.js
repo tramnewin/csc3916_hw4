@@ -164,52 +164,20 @@ router.route('/movies')
                     res.json({success: false, message: "Error! The review was not found"})
                 }
                 else{
-                    Movie.aggregate([{
-                        $match: {title: req.body.title}
-                    },
+                    Movie.aggregate([
+                        { "$unwind": "$review" },
                         {
-                            $lookup: {
-                                from: "reviews",
-                                localField: "Title",
-                                foreignField: "Title",
-                                as: "reviews"
-                            }
-                        },
-                        {
-                            $group:{
-                                Title: "Title",
-                                counts: {$push: {Rating: "$Title.rating", count: "$count"}},
-                                reviews: {$push: "$reviews"},
-                                totalItemCount: {$sum: "$count"}, //for avg calculation
-                                totalRating: {$sum: "$Title.rating"} // //for avg calculation
-                            }
-                            },
-                        {
-                            $project: {
-                                Title: "$Title",
-                                avgRating: {$divide: ["$totalRating", "$totalItemCount"]},
-                                counts: "$counts",
-                                reviews: {
-                                    $slice: [
-                                        {
-                                            $reduce: {
-                                                input: "$reviews",
-                                                initialValue: [],
-                                                in: { $concatArrays: ["$$value", "$$this"] }
-                                            }
-                                        }
-                                ]
-
-                                }
+                            "$group": {
+                                "_id": "review",
+                                "ratingAvg": { "$avg": "$rating" }
                             }
                         }
-                    ]).exec(function (err, movie) {
-                        if (err) {
-                            return res.json(err);
-                        } else {
-                            return res.json(movie);
-                        }
+                    ], function(err, results) {
+                        Movie.populate(results, { "path": "_id" }, function(err, result) {
+                            console.log(result);
+                        });
                     })
+
                 }
             })
 

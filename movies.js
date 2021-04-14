@@ -16,7 +16,13 @@ var MovieSchema = new Schema({
     Title: {type:String, required: true},
     Year: { type: String, required: true},
     Genre: { type: String, required: true, enum:['Action', 'Adventure',  'Comedy',  'Drama',  'Fantasy',  'Horror',  'Mystery',  'Thriller', 'Western'] },
-    Actors : { type : Array,ActorName:{type:String},CharacterName:{type:String} }
+    Actors : { type : Array,ActorName:{type:String},CharacterName:{type:String} },
+    reviews:[
+        {
+            type: mongoose1.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 });
 
 //return the model to server
