@@ -163,7 +163,7 @@ router.route('/movies')
                 if (err) {
                     res.json({success: false, message: "Error! The review was not found"})
                 }
-                else{
+                else if (!req.params.Title) {
                     Movie.aggregate([{
                         $match: {title: req.body.title}
                     },
@@ -182,6 +182,11 @@ router.route('/movies')
                         }
                     })
                 }
+                else{
+                    return res.json(movie);
+                }
+
+
             })
 
         }else {
