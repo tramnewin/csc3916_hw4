@@ -159,26 +159,24 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
         if(review == 'true'){
-            Movie.findOne({Title:req.body.Title}, function(err, movie) {
+            Movie.findOne({_id:req.body._id}, function(err, movie) {
                 if (err) {
                     res.json({success: false, message: "Error! The review was not found"})
                 }
                 else{
                     Movie.aggregate([{
-                        $match: {Title: req.body.Title}
+                        $match: {_id: req.body._id}
                     },
                         {
                             $lookup: {
                                 from: "reviews",
-                                localField: "Title",
-                                foreignField: "Title",
+                                localField: "_id",
+                                foreignField: "_id",
                                 as: "reviews"
                             }
                         },
-                        { "$group": {
-                            "Title": "$Title",
-                         "AverageRating": { "$avg": { "$ifNull": ["$rating",0 ] } }
-                       }}
+                        {}
+
                     ]).exec(function (err, movie) {
                         if (err) {
                             return res.json(err);
@@ -207,6 +205,7 @@ router.route('/reviews')
         }else{
 
             var review = new Review();
+            review._id = req.body._id;
             review.Title = req.body.Title;
             review.Name = req.body.Name;
             review.Rating = req.body.Rating;
