@@ -158,36 +158,31 @@ router.route('/movies')
     })
     .get(authJwtController.isAuthenticated, function(req, res){
         let review = req.query.review;
-        if(review == 'true'){
-            Movie.findOne({Title:req.params.Title}, function(err, movie) {
-                if (err) {
-                    res.json({success: false, message: "Error! The review was not found"})
-                }
-                else if (!req.params.Title) {
-                    Movie.aggregate([{
-                        $match: {title: req.body.title}
-                    },
-                        {
-                            $lookup: {
-                                from: "reviews",
-                                localField: "Title",
-                                foreignField: "Title",
-                                as: "reviews"
-                            }
-                        }]).exec(function (err, movie) {
-                        if (err) {
-                            return res.json(err);
-                        } else {
-                            return res.json(movie);
+        if(review == 'true') {
+            if (!req.params.Title) {
+                Movie.aggregate([{
+                    $match: {title: req.body.title}
+                },
+                    {
+                        $lookup: {
+                            from: "reviews",
+                            localField: "Title",
+                            foreignField: "Title",
+                            as: "reviews"
                         }
-                    })
-                }
-                else{
+                    }]).exec(function (err, movie) {
+                    if (err) {
+                        return res.json(err);
+                    } else {
+                        return res.json(movie);
+                    }
+                })
+            }
+            else{
+                Movie.findOne({Title: req.params.Title}).exec(function(err, movie){
                     return res.json(movie);
-                }
-
-
-            })
+                })
+        }
 
         }else {
             Movie.find({}, function(err, movies){
