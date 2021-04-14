@@ -17,12 +17,6 @@ var ReviewSchema = new Schema({
     Name: {type:String},
     Rating: { type: Number},
     Review: { type: String},
-    movie: [
-        {
-            type: mongoose2.Schema.Types.ObjectId,
-            ref: "Movie"
-        }
-    ]
 });
 
 //return the model to server

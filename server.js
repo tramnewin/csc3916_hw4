@@ -165,16 +165,20 @@ router.route('/movies')
                 }
                 else{
                     Movie.aggregate([{
-                        $match: {_id: req.body._id}
+                        $match: {Title: req.body.Title}
                     },
                         {
                             $lookup: {
                                 from: "reviews",
-                                localField: "_id",
-                                foreignField: "_id",
+                                localField: "Title",
+                                foreignField: "Title",
                                 as: "reviews"
                             }
-                        }
+                        },
+                        { "$group": {
+                            "Title": "$Title",
+                         "AverageRating": { "$avg": { "$ifNull": ["$rating",0 ] } }
+                       }}
                     ]).exec(function (err, movie) {
                         if (err) {
                             return res.json(err);
