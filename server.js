@@ -179,7 +179,7 @@ router.route('/movies')
                 })
             }
             else{
-                Movie.findOne({Title: req.params.Title}).exec(function(err, movie){
+                Movie.findOne({Title: req.body.Title}).exec(function(err, movie){
                     return res.json(movie);
                 })
         }
