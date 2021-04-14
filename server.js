@@ -165,19 +165,16 @@ router.route('/movies')
                 }
                 else{
                     Movie.aggregate([{
-                        $match: {_id: req.body._id}
+                        $match: {title: req.body.title}
                     },
                         {
                             $lookup: {
                                 from: "reviews",
-                                localField: "${_id}",
-                                foreignField: "_id",
+                                localField: "Title",
+                                foreignField: "Title",
                                 as: "reviews"
                             }
-                        },
-                        {}
-
-                    ]).exec(function (err, movie) {
+                        }]).exec(function (err, movie) {
                         if (err) {
                             return res.json(err);
                         } else {
@@ -205,7 +202,6 @@ router.route('/reviews')
         }else{
 
             var review = new Review();
-            review._id = req.body._id;
             review.Title = req.body.Title;
             review.Name = req.body.Name;
             review.Rating = req.body.Rating;

@@ -13,7 +13,6 @@ try {
 }
 mongoose2.set('useCreateIndex', true);
 var ReviewSchema = new Schema({
-    _id: {type:String, required: true},
     Title: {type:String, required: true},
     Name: {type:String},
     Rating: { type: Number},
